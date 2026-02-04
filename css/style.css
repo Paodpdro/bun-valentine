@@ -1,0 +1,309 @@
+/* ===== RESET & BASE STYLES ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent; /* Remove touch highlight on mobile */
+}
+
+html {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    -webkit-text-size-adjust: 100%; /* Prevent iOS text size adjust */
+    -moz-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+}
+
+/* ===== BODY & BACKGROUND ===== */
+body {
+    background-image: url(/images/background.jpeg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed; /* Prevents background jump */
+    min-height: 100vh;
+    min-height: -webkit-fill-available; /* iOS fix */
+    padding: env(safe-area-inset-top) env(safe-area-inset-right) 
+             env(safe-area-inset-bottom) env(safe-area-inset-left); /* Notch/safe area support */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* ===== MAIN CONTAINER ===== */
+#main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    min-height: 100vh;
+    min-height: -webkit-fill-available; /* iOS fix */
+    padding: 20px;
+    padding: max(20px, env(safe-area-inset-top)) /* Extra safe area padding */
+             max(20px, env(safe-area-inset-right))
+             max(20px, env(safe-area-inset-bottom))
+             max(20px, env(safe-area-inset-left));
+}
+
+/* ===== CONTENT BOX ===== */
+#box {
+    padding: min(40px, 5vw);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    text-align: center;
+    width: 100%;
+    max-width: min(90vw, 500px);
+    min-height: auto; /* Let content determine minimum */
+    /* REMOVE or FIX these lines: */
+    /* max-height: 90vh; */ /* Remove this line */
+    /* overflow-y: auto; */ /* Remove this line */
+    border-radius: clamp(15px, 3vw, 20px);
+    box-shadow: 1px 3px 23px 6px rgba(0,0,0,0.7);
+    -webkit-box-shadow: 1px 3px 23px 6px rgba(0,0,0,0.7);
+    -moz-box-shadow: 1px 3px 23px 6px rgba(0,0,0,0.7);
+    /* ADD this instead: */
+    overflow: visible; /* Or remove overflow entirely */
+}
+
+/* ===== TITLE ===== */
+#title {
+    margin: 10px 0 25px 0;
+    font-weight: bold;
+    /* More conservative sizing */
+    font-size: clamp(1.2rem, 3.5vw, 1.8rem); /* Reduced from 5vw to 3.5vw */
+    color: black;
+    letter-spacing: 0.5px; /* Reduced from clamp */
+    line-height: 1.3;
+    padding: 0 10px;
+    word-break: break-word;
+}
+
+/* ===== IMAGE ===== */
+#smallImage {
+    object-fit: cover;
+    border-radius: clamp(8px, 2vw, 10px); /* Responsive border radius */
+    width: 100%;
+    max-width: min(80vw, 300px); /* Responsive image sizing */
+    height: auto;
+    aspect-ratio: 2/3; /* Maintain your original 20em/30em proportion */
+    margin: 15px 0;
+    display: block;
+}
+
+/* ===== BUTTON ===== */
+#initialButton {
+    display: block;
+    margin: 25px auto 15px auto;
+    border-radius: clamp(15px, 3vw, 20px);
+    padding: clamp(12px, 2vw, 15px) clamp(25px, 4vw, 30px);
+    font-size: clamp(1rem, 3vw, 1.3rem);
+    border: none;
+    font-weight: bold;
+    background-color: white;
+    color: black;
+    min-height: 50px; /* Minimum touch target (44px + padding) */
+    min-width: 180px;
+    width: auto;
+    max-width: 100%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    -webkit-transition: all 0.3s ease;
+    touch-action: manipulation; /* Optimize for touch */
+}
+
+#initialButton:hover,
+#initialButton:active {
+    background-color: rgb(213, 213, 213);
+    transform: translateY(-2px); /* Subtle lift effect */
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+#initialButton:active {
+    transform: translateY(0); /* Press effect */
+}
+
+/* ===== LINK ===== */
+a {
+    text-decoration: none;
+    display: inline-block;
+    width: auto;
+}
+
+/* ===== YAY TEXT (for question.html) ===== */
+#yay {
+    font-weight: bold;
+    font-size: clamp(0.9rem, 2.5vw, 1rem);
+    color: black;
+    letter-spacing: clamp(0.5px, 0.3vw, 1px);
+    margin: 15px 0;
+    line-height: 1.4;
+    padding: 0 10px;
+}
+
+/* ===== MEDIA QUERIES FOR SPECIFIC DEVICES ===== */
+
+/* iPhone SE & Small Phones (<= 375px) */
+@media (max-width: 375px) {
+    html {
+        font-size: 14px;
+    }
+    
+    #box {
+        padding: 20px 15px;
+        max-width: 95vw;
+    }
+    
+    #title {
+        font-size: 1.4rem;
+        margin-bottom: 20px;
+    }
+    
+    #smallImage {
+        max-width: 85vw;
+    }
+    
+    #initialButton {
+        min-width: 160px;
+        padding: 10px 20px;
+    }
+}
+
+/* Tablets & iPads (768px - 1024px) */
+@media (min-width: 768px) and (max-width: 1024px) {
+    #box {
+        max-width: min(70vw, 600px);
+        padding: 50px 40px;
+    }
+    
+    #title {
+        font-size: 2.2rem;
+        margin-bottom: 30px;
+    }
+    
+    #smallImage {
+        max-width: min(60vw, 350px);
+    }
+    
+    #initialButton {
+        font-size: 1.4rem;
+        padding: 15px 35px;
+        min-height: 55px;
+    }
+}
+
+/* iPad Pro & Large Tablets (1024px - 1366px) */
+@media (min-width: 1024px) and (max-width: 1366px) {
+    #box {
+        max-width: min(60vw, 650px);
+        padding: 60px 50px;
+    }
+    
+    #title {
+        font-size: 2.5rem;
+    }
+    
+    #smallImage {
+        max-width: min(50vw, 400px);
+    }
+}
+
+/* Landscape Mobile */
+@media (max-height: 500px) and (orientation: landscape) {
+    #main {
+        padding: 10px;
+        align-items: flex-start;
+        min-height: auto;
+    }
+    
+    #box {
+        max-height: 90vh;
+        padding: 20px;
+        margin-top: 10px;
+        overflow-y: auto;
+    }
+    
+    #title {
+        font-size: 1.5rem;
+        margin: 5px 0 15px 0;
+    }
+    
+    #smallImage {
+        max-width: 150px;
+        max-height: 200px;
+        margin: 10px 0;
+    }
+    
+    #initialButton {
+        margin: 15px auto 10px auto;
+        padding: 8px 20px;
+        min-height: 40px;
+    }
+}
+
+/* Very Tall Screens (iPhone 14/15 Pro Max, etc) */
+@media (min-height: 800px) {
+    #box {
+        max-height: 80vh;
+    }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+    #title, #yay {
+        color: #333; /* Darker text for better contrast on light background */
+    }
+    
+    #initialButton {
+        background-color: #f5f5f5;
+    }
+    
+    #initialButton:hover {
+        background-color: #e0e0e0;
+    }
+}
+
+/* High Contrast Mode */
+@media (prefers-contrast: high) {
+    #box {
+        background-color: rgba(255, 255, 255, 0.9);
+    }
+    
+    #title, #yay {
+        font-weight: 900;
+    }
+}
+
+/* Reduce Motion */
+@media (prefers-reduced-motion: reduce) {
+    #initialButton {
+        transition: none;
+        -webkit-transition: none;
+    }
+    
+    #initialButton:hover,
+    #initialButton:active {
+        transform: none;
+    }
+}
+
+/* Print Styles */
+@media print {
+    body {
+        background: white !important;
+    }
+    
+    #box {
+        background: white !important;
+        box-shadow: none !important;
+        max-width: 100% !important;
+    }
+    
+    #initialButton {
+        display: none !important;
+    }
+}
